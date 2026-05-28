@@ -1,0 +1,24 @@
+name: Generate Project Files
+
+on:
+  push:
+    paths:
+      - 'setup.sh'
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run setup script
+        run: bash setup.sh
+
+      - name: Commit generated files
+        uses: EndBug/add-and-commit@v9
+        with:
+          message: 'توليد ملفات المشروع تلقائيا'
+          add: '.'
+          author_name: 'GitHub Actions'
+          author_email: 'actions@github.com'
