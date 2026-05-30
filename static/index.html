@@ -7,35 +7,124 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <div class="logo">🎬 Vireon AI</div>
-            <p class="subtitle">أدخل فكرة الفيديو وسنصنعه لك تلقائياً</p>
+    <div class="app-container">
+        <!-- الهيدر -->
+        <header class="app-header">
+            <div class="header-glow"></div>
+            <h1 class="logo">🎬 Vireon AI</h1>
+            <p class="tagline">أدخل فكرة فيديو وسنصنعه لك خلال دقائق</p>
         </header>
 
-        <div class="chat-area" id="chatArea">
-            <div class="message bot-message">
-                <div class="avatar">🤖</div>
-                <div class="content">
-                    <p>مرحباً! أنا مساعدك الذكي لصنع الفيديوهات القصيرة.</p>
-                    <p>أخبرني بفكرة الفيديو الذي تريده وسأقوم بإنشائه لك فوراً 🎥</p>
-                    <div class="suggestions">
-                        <button class="suggestion-btn">قطة تطبخ في مطبخ فضائي</button>
-                        <button class="suggestion-btn">أسرع 5 سيارات في العالم</button>
-                        <button class="suggestion-btn">تمارين رياضية للمبتدئين</button>
-                    </div>
+        <!-- منطقة الدردشة -->
+        <main class="chat-container" id="chatContainer">
+            <div class="welcome-screen" id="welcomeScreen">
+                <div class="welcome-icon">🎥</div>
+                <h2>مرحباً بك في Vireon AI</h2>
+                <p>اكتب فكرة الفيديو الذي تريد صنعه</p>
+                <div class="suggestions-grid">
+                    <button class="suggestion-card" onclick="quickSend('قطة تطبخ في مطبخ فضائي')">
+                        <span class="card-icon">👨‍🍳</span>
+                        <span>قطة تطبخ في مطبخ فضائي</span>
+                    </button>
+                    <button class="suggestion-card" onclick="quickSend('أسرع 5 سيارات في العالم')">
+                        <span class="card-icon">🏎️</span>
+                        <span>أسرع 5 سيارات في العالم</span>
+                    </button>
+                    <button class="suggestion-card" onclick="quickSend('تمارين رياضية للمبتدئين')">
+                        <span class="card-icon">💪</span>
+                        <span>تمارين رياضية للمبتدئين</span>
+                    </button>
+                    <button class="suggestion-card" onclick="quickSend('حقائق مذهلة عن الفضاء')">
+                        <span class="card-icon">🚀</span>
+                        <span>حقائق مذهلة عن الفضاء</span>
+                    </button>
                 </div>
             </div>
-        </div>
 
-        <div class="input-area">
-            <input type="text" id="promptInput" placeholder="اكتب فكرة الفيديو هنا..." autocomplete="off">
-            <button id="sendBtn" class="send-btn">📤</button>
-        </div>
+            <div class="messages-area" id="messagesArea"></div>
 
-        <div id="statusBar" class="status-bar" style="display:none;"></div>
+            <!-- بطاقة التقدم -->
+            <div class="progress-card" id="progressCard" style="display:none;">
+                <div class="progress-header">
+                    <div class="pulse-dot"></div>
+                    <span id="progressTitle">جاري معالجة طلبك</span>
+                </div>
+                <div class="steps-container">
+                    <div class="step" id="step1">
+                        <div class="step-icon">📝</div>
+                        <div class="step-info">
+                            <div class="step-title">إنشاء النص</div>
+                            <div class="step-status">في الانتظار...</div>
+                        </div>
+                        <div class="step-check">○</div>
+                    </div>
+                    <div class="step" id="step2">
+                        <div class="step-icon">🎬</div>
+                        <div class="step-info">
+                            <div class="step-title">جمع المقاطع</div>
+                            <div class="step-status">في الانتظار...</div>
+                        </div>
+                        <div class="step-check">○</div>
+                    </div>
+                    <div class="step" id="step3">
+                        <div class="step-icon">🎤</div>
+                        <div class="step-info">
+                            <div class="step-title">توليد الصوت</div>
+                            <div class="step-status">في الانتظار...</div>
+                        </div>
+                        <div class="step-check">○</div>
+                    </div>
+                    <div class="step" id="step4">
+                        <div class="step-icon">🎥</div>
+                        <div class="step-info">
+                            <div class="step-title">تركيب الفيديو</div>
+                            <div class="step-status">في الانتظار...</div>
+                        </div>
+                        <div class="step-check">○</div>
+                    </div>
+                    <div class="step" id="step5">
+                        <div class="step-icon">✅</div>
+                        <div class="step-info">
+                            <div class="step-title">الانتهاء</div>
+                            <div class="step-status">في الانتظار...</div>
+                        </div>
+                        <div class="step-check">○</div>
+                    </div>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+            </div>
+
+            <!-- نتيجة الفيديو -->
+            <div class="video-card" id="videoCard" style="display:none;">
+                <div class="video-card-header">
+                    <span>✅ الفيديو جاهز!</span>
+                </div>
+                <video id="videoPlayer" controls autoplay playsinline></video>
+                <a id="downloadLink" class="download-button" download="vireon_video.mp4">
+                    📥 تحميل الفيديو
+                </a>
+            </div>
+        </main>
+
+        <!-- شريط الإدخال -->
+        <footer class="input-footer">
+            <div class="input-wrapper">
+                <input 
+                    type="text" 
+                    id="promptInput" 
+                    placeholder="اكتب فكرة الفيديو هنا..." 
+                    autocomplete="off"
+                    dir="rtl"
+                >
+                <button id="sendBtn" class="send-button">
+                    <span>📤</span>
+                </button>
+            </div>
+        </footer>
     </div>
 
     <script src="script.js"></script>
 </body>
-  </html>
+</html>
