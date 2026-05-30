@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vireon AI - صانع الفيديو الذكي</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">🎬 Vireon AI</div>
+            <p class="subtitle">أدخل فكرة الفيديو وسنصنعه لك تلقائياً</p>
+        </header>
+
+        <div class="chat-area" id="chatArea">
+            <div class="message bot-message">
+                <div class="avatar">🤖</div>
+                <div class="content">
+                    <p>مرحباً! أنا مساعدك الذكي لصنع الفيديوهات القصيرة.</p>
+                    <p>أخبرني بفكرة الفيديو الذي تريده وسأقوم بإنشائه لك فوراً 🎥</p>
+                    <div class="suggestions">
+                        <button class="suggestion-btn">قطة تطبخ في مطبخ فضائي</button>
+                        <button class="suggestion-btn">أسرع 5 سيارات في العالم</button>
+                        <button class="suggestion-btn">تمارين رياضية للمبتدئين</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="input-area">
+            <input type="text" id="promptInput" placeholder="اكتب فكرة الفيديو هنا..." autocomplete="off">
+            <button id="sendBtn" class="send-btn">📤</button>
+        </div>
+
+        <div id="statusBar" class="status-bar" style="display:none;"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+  </html>
